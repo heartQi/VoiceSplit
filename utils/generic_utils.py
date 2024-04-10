@@ -4,6 +4,7 @@ import json
 import re
 import datetime
 import librosa
+import soundfile as sf
 
 import torch.nn as nn
 import numpy as np
@@ -235,9 +236,9 @@ def mix_wavfiles_without_voice_overlay(output_dir, sample_rate, audio_len, ap, f
     target_wav_path = glob_re_to_filename(data_out_dir, form['target_wav'], num, sub=1)
     mixed_wav_path = glob_re_to_filename(data_out_dir, form['mixed_wav'], num, sub=1)
     emb_wav_path = glob_re_to_filename(data_out_dir, form['emb_wav'], num, sub=1)
-    librosa.output.write_wav(emb_wav_path, emb_audio, sample_rate)
-    librosa.output.write_wav(target_wav_path, clean_audio_padded, sample_rate)
-    librosa.output.write_wav(mixed_wav_path, mixed_audio, sample_rate)
+    sf.write(emb_wav_path, emb_audio, sample_rate)
+    sf.write(target_wav_path, clean_audio_padded, sample_rate)
+    sf.write(mixed_wav_path, mixed_audio, sample_rate)
 
     # extract and save spectrograms
     clean_spec, _ = ap.get_spec_from_audio_path(target_wav_path) # we need to load the wav to maintain compatibility with all audio backend
@@ -251,9 +252,9 @@ def mix_wavfiles_without_voice_overlay(output_dir, sample_rate, audio_len, ap, f
     target_wav_path = glob_re_to_filename(data_out_dir, form['target_wav'], num, sub=2)
     mixed_wav_path = glob_re_to_filename(data_out_dir, form['mixed_wav'], num, sub=2)
     emb_wav_path = glob_re_to_filename(data_out_dir, form['emb_wav'], num, sub=2)
-    librosa.output.write_wav(emb_wav_path, emb_audio, sample_rate)
-    librosa.output.write_wav(target_wav_path, clean_audio, sample_rate)
-    librosa.output.write_wav(mixed_wav_path, clean_audio, sample_rate)
+    sf.write(emb_wav_path, emb_audio, sample_rate)
+    sf.write(target_wav_path, clean_audio, sample_rate)
+    sf.write(mixed_wav_path, clean_audio, sample_rate)
 
     # extract and save spectrograms
     clean_spec, _ = ap.get_spec_from_audio_path(target_wav_path) # we need to load the wav to maintain compatibility with all audio backend
@@ -267,9 +268,9 @@ def mix_wavfiles_without_voice_overlay(output_dir, sample_rate, audio_len, ap, f
     target_wav_path = glob_re_to_filename(data_out_dir, form['target_wav'], num, sub=3)
     mixed_wav_path = glob_re_to_filename(data_out_dir, form['mixed_wav'], num, sub=3)
     emb_wav_path = glob_re_to_filename(data_out_dir, form['emb_wav'], num, sub=3)
-    librosa.output.write_wav(emb_wav_path, emb_audio, sample_rate)
-    librosa.output.write_wav(target_wav_path, interference_output, sample_rate)
-    librosa.output.write_wav(mixed_wav_path, interference, sample_rate)
+    sf.write(emb_wav_path, emb_audio, sample_rate)
+    sf.write(target_wav_path, interference_output, sample_rate)
+    sf.write(mixed_wav_path, interference, sample_rate)
 
     # extract and save spectrograms
     clean_spec, _ = ap.get_spec_from_audio_path(target_wav_path) # we need to load the wav to maintain compatibility with all audio backend
@@ -283,9 +284,9 @@ def mix_wavfiles_without_voice_overlay(output_dir, sample_rate, audio_len, ap, f
     target_wav_path = glob_re_to_filename(data_out_dir, form['target_wav'], num, sub=4)
     mixed_wav_path = glob_re_to_filename(data_out_dir, form['mixed_wav'], num, sub=4)
     emb_wav_path = glob_re_to_filename(data_out_dir, form['emb_wav'], num, sub=4)
-    librosa.output.write_wav(emb_wav_path, emb_audio_random, sample_rate)
-    librosa.output.write_wav(target_wav_path, clean_audio_padded_random, sample_rate)
-    librosa.output.write_wav(mixed_wav_path, mixed_audio_random, sample_rate)
+    sf.write(emb_wav_path, emb_audio_random, sample_rate)
+    sf.write(target_wav_path, clean_audio_padded_random, sample_rate)
+    sf.write(mixed_wav_path, mixed_audio_random, sample_rate)
 
     # extract and save spectrograms
     clean_spec, _ = ap.get_spec_from_audio_path(target_wav_path) # we need to load the wav to maintain compatibility with all audio backend
@@ -332,9 +333,9 @@ def mix_wavfiles(output_dir, sample_rate, audio_len, ap, form, num, embedding_ut
     target_wav_path = glob_re_to_filename(data_out_dir, form['target_wav'], num)
     mixed_wav_path = glob_re_to_filename(data_out_dir, form['mixed_wav'], num)
     emb_wav_path = glob_re_to_filename(data_out_dir, form['emb_wav'], num)
-    librosa.output.write_wav(emb_wav_path, emb_audio, sample_rate)
-    librosa.output.write_wav(target_wav_path, clean_audio, sample_rate)
-    librosa.output.write_wav(mixed_wav_path, mixed_audio, sample_rate)
+    sf.write(emb_wav_path, emb_audio, sample_rate)
+    sf.write(target_wav_path, clean_audio, sample_rate)
+    sf.write(mixed_wav_path, mixed_audio, sample_rate)
 
     # extract and save spectrograms
     clean_spec, _ = ap.get_spec_from_audio_path(target_wav_path) # we need to load the wav to maintain compatibility with all audio backend
